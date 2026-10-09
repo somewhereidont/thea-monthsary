@@ -227,24 +227,16 @@ function startScreen3Animation() {
     const glowingContainer = document.getElementById('glowingContainer');
     glowingContainer.innerHTML = '';
     
-    const messages = [
-        'I LOVE YOU',
-        'I LOVE YOU',
-        'I LOVE YOU',
-        'I LOVE YOU',
-        'I LOVE YOU'
-    ];
+    const messageCount = 120; // 100+ glowing texts
     
-    let delay = 0;
-    
-    messages.forEach((msg, index) => {
+    for (let i = 0; i < messageCount; i++) {
         setTimeout(() => {
             const glowText = document.createElement('div');
             glowText.className = 'glowing-text';
-            glowText.textContent = msg;
+            glowText.textContent = 'I LOVE YOU';
             
-            // Random position
-            const x = Math.random() * (window.innerWidth - 300);
+            // Random position across entire screen
+            const x = Math.random() * (window.innerWidth - 200);
             const y = Math.random() * (window.innerHeight - 100);
             
             glowText.style.left = x + 'px';
@@ -252,10 +244,8 @@ function startScreen3Animation() {
             glowText.style.animationDelay = '0s';
             
             glowingContainer.appendChild(glowText);
-        }, delay);
-        
-        delay += 400; // Stagger the appearance
-    });
+        }, i * 50); // Stagger appearance for cinematic effect
+    }
 }
 
 // Make envelopes swipeable on mobile
