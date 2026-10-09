@@ -1,0 +1,492 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+/* SCREENS */
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* SCREEN 1 - HEART ANIMATION */
+#screen1 {
+    background-color: #000;
+}
+
+#heartCanvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+#screen1 .content {
+    position: absolute;
+    bottom: 60px;
+    text-align: center;
+    width: 100%;
+    z-index: 6;
+}
+
+#screen1 h1 {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    font-weight: 300;
+}
+
+.continue-btn {
+    padding: 12px 40px;
+    font-size: 1rem;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.continue-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.continue-btn:active {
+    transform: scale(0.98);
+}
+
+/* SCREEN 2 - ENVELOPES */
+#screen2 {
+    background-color: #fff;
+    display: block;
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+
+.screen2-content {
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.monthsary-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    font-weight: bold;
+    color: #000;
+    letter-spacing: 2px;
+}
+
+/* ENVELOPES */
+.envelopes-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 80px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.envelope {
+    width: 200px;
+    height: 140px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-5px);
+}
+
+.envelope-body {
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform 0.6s ease;
+    z-index: 10;
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(90deg) translateZ(50px);
+}
+
+.question-mark {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #999;
+    z-index: 5;
+}
+
+.swipe-hint {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 60px;
+}
+
+/* POPUP */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.popup.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.popup-content {
+    position: relative;
+    z-index: 101;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 500px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #000;
+    font-weight: bold;
+}
+
+.popup-button {
+    padding: 12px 40px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.popup-button:hover {
+    background-color: #333;
+}
+
+.popup-button:active {
+    transform: scale(0.98);
+}
+
+/* CONTENT VIEWS */
+.content-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    padding: 40px 20px;
+    overflow-y: auto;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.content-view.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.back-btn {
+    position: sticky;
+    top: 20px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    z-index: 60;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #333;
+}
+
+.letter-content,
+.reasons-content {
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #333;
+    padding-bottom: 40px;
+}
+
+.letter-content p,
+.reasons-content p {
+    margin-bottom: 20px;
+}
+
+.reasons-content ol {
+    margin-left: 20px;
+}
+
+.reasons-content li {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* FINAL CONTINUE BUTTON */
+.final-continue-btn {
+    padding: 12px 40px;
+    font-size: 1rem;
+    color: #000;
+    background-color: #f0f0f0;
+    border: 2px solid #000;
+    cursor: pointer;
+    border-radius: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 80px;
+    align-self: center;
+}
+
+.final-continue-btn.hidden {
+    display: none;
+}
+
+.final-continue-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.final-continue-btn:active {
+    transform: scale(0.98);
+}
+
+/* SCREEN 3 - FINAL SURPRISE */
+#screen3 {
+    background-color: #000;
+    position: relative;
+}
+
+.glowing-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glowing-text {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff6666;
+    opacity: 0;
+    letter-spacing: 2px;
+    animation: glowAppear 1.5s ease-out forwards;
+}
+
+@keyframes glowAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.final-message {
+    position: relative;
+    z-index: 20;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.final-message h1 {
+    font-size: 4rem;
+    color: #fff;
+    text-shadow: 0 0 20px #ff0000, 0 0 40px #ff6666;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+/* ASH PARTICLES TRANSITION */
+.ash-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 30;
+}
+
+.ash {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    animation: ashFloat 3s ease-out forwards;
+}
+
+@keyframes ashFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-400px) translateX(var(--tx));
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    #screen1 h1 {
+        font-size: 1.5rem;
+    }
+
+    .monthsary-title {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+
+    .envelopes-container {
+        gap: 15px;
+        margin-bottom: 60px;
+    }
+
+    .envelope {
+        width: 160px;
+        height: 110px;
+    }
+
+    .question-mark {
+        font-size: 2.5rem;
+    }
+
+    .popup-content {
+        max-width: 90%;
+        padding: 30px;
+    }
+
+    .final-message h1 {
+        font-size: 2.5rem;
+    }
+
+    .glowing-text {
+        font-size: 1.5rem;
+    }
+
+    .letter-content,
+    .reasons-content {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #screen1 h1 {
+        font-size: 1.2rem;
+    }
+
+    .monthsary-title {
+        font-size: 1.4rem;
+        margin-bottom: 30px;
+    }
+
+    .envelope {
+        width: 140px;
+        height: 100px;
+    }
+
+    .question-mark {
+        font-size: 2rem;
+    }
+
+    .final-message h1 {
+        font-size: 1.8rem;
+    }
+}
