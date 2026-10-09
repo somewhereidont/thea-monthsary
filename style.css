@@ -564,4 +564,18 @@ body {
     .final-message h1 {
         font-size: 1.8rem;
     }
+
+
+/* Fix for Screen 3 layout collapse */
+#screen3 {
+  height: 100vh !important;
+  position: fixed !important;
+  z-index: 10;
+  background-color: #000;
+}
+
+/* Ensure the active class triggers visibility */
+.screen.active {
+  opacity: 1 !important;
+  pointer-events: auto;
 }
