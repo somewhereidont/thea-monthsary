@@ -256,10 +256,7 @@ screen2Btn.addEventListener('click', () => {
 
 function startScreen3Animation() {
     const glowingContainer = document.getElementById('glowingContainer');
-    const finalMsg = document.getElementById('finalMessage');
-    
     glowingContainer.innerHTML = '';
-    finalMsg.style.opacity = '1';
     
     const messageCount = 120; // 100+ glowing texts
     
