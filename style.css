@@ -87,6 +87,7 @@ body {
     display: block;
     overflow-y: auto;
     padding: 40px 20px;
+    position: relative;
 }
 
 .screen2-content {
@@ -346,6 +347,54 @@ body {
     transform: scale(0.98);
 }
 
+/* CREDIT TEXT */
+.credit-text {
+    color: #fff;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 2rem;
+    opacity: 0.7;
+    max-width: 600px;
+    line-height: 1.5;
+    align-self: center;
+}
+
+/* FLYING HEARTS ON SCREEN 2 */
+.flying-hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 15;
+    overflow: hidden;
+}
+
+.flying-heart {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    font-size: 1.8rem;
+    color: #ff0000;
+    text-shadow: 0 0 14px rgba(255, 0, 0, 0.8);
+    animation: heartFlyUp 4s ease-in forwards;
+}
+
+@keyframes heartFlyUp {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(0.7);
+    }
+    25% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--tx), -120vh, 0) scale(1.3);
+    }
+}
+
 /* SCREEN 3 - FINAL SURPRISE */
 #screen3 {
     background-color: #000;
@@ -358,6 +407,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 10;
 }
 
 .glowing-text {
@@ -386,13 +436,26 @@ body {
 }
 
 .final-message {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 20;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    opacity: 0;
+    animation: showMessage 1s ease-in forwards;
+    animation-delay: 5s;
+}
+
+@keyframes showMessage {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 .final-message h1 {
@@ -401,6 +464,7 @@ body {
     text-shadow: 0 0 20px #ff0000, 0 0 40px #ff6666;
     letter-spacing: 3px;
     font-weight: bold;
+    margin: 0;
 }
 
 /* ASH PARTICLES TRANSITION */
@@ -432,51 +496,6 @@ body {
         opacity: 0;
         transform: translateY(-400px) translateX(var(--tx));
     }
-}
-
-/* FLYING HEARTS ON SCREEN 2 */
-.flying-hearts-container {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 12;
-    overflow: hidden;
-}
-
-.flying-heart {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    font-size: 1.8rem;
-    color: #ff0000;
-    text-shadow: 0 0 14px rgba(255, 0, 0, 0.8);
-    animation: heartFlyUp 4s ease-in forwards;
-}
-
-@keyframes heartFlyUp {
-    0% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(0.7);
-    }
-    25% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translate3d(var(--tx), -120vh, 0) scale(1.3);
-    }
-}
-
-/* CREDIT TEXT */
-.credit-text {
-    color: #fff;
-    font-size: 0.85rem;
-    text-align: center;
-    margin-top: 2rem;
-    opacity: 0.7;
-    max-width: 600px;
-    line-height: 1.5;
-    align-self: center;
 }
 
 /* RESPONSIVE */
