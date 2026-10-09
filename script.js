@@ -250,19 +250,16 @@ screen2Btn.addEventListener('click', () => {
     screen2.classList.remove('active');
     screen3.classList.add('active');
     startScreen3Animation();
-    
-    // Show final message after 5 seconds
-    setTimeout(() => {
-        const finalMsg = document.getElementById('finalMessage');
-        finalMsg.style.opacity = '1';
-    }, 5000);
 });
 
 // ===== SCREEN 3: FINAL ANIMATION =====
 
 function startScreen3Animation() {
     const glowingContainer = document.getElementById('glowingContainer');
+    const finalMsg = document.getElementById('finalMessage');
+    
     glowingContainer.innerHTML = '';
+    finalMsg.style.opacity = '1';
     
     const messageCount = 120; // 100+ glowing texts
     
