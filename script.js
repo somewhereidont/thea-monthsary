@@ -105,6 +105,7 @@ screen1Btn.addEventListener('click', () => {
     setTimeout(() => {
         screen1.classList.remove('active');
         screen2.classList.add('active');
+        spawnFlyingHearts();
         showFinalContinueButton();
     }, 2000); // Wait for ash animation to complete
 });
@@ -131,6 +132,36 @@ function createAshTransition() {
         ash.style.animationDelay = Math.random() * 1 + 's';
         
         ashContainer.appendChild(ash);
+    }
+}
+
+// ===== FLYING HEARTS ON SCREEN 2 =====
+
+function spawnFlyingHearts() {
+    const container = document.getElementById('flyingHeartsContainer');
+    container.innerHTML = ''; // Clear previous hearts
+    
+    const heartCount = 40;
+    
+    for (let i = 0; i < heartCount; i++) {
+        setTimeout(() => {
+            const heart = document.createElement('div');
+            heart.className = 'flying-heart';
+            heart.textContent = '❤';
+            
+            // Random horizontal position
+            const randomX = (Math.random() - 0.5) * 800;
+            heart.style.left = (50 + (Math.random() - 0.5) * 40) + '%';
+            heart.style.setProperty('--tx', randomX + 'px');
+            
+            // Random animation delay
+            heart.style.animationDelay = (Math.random() * 0.8) + 's';
+            
+            container.appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => heart.remove(), 4200);
+        }, i * 100);
     }
 }
 
