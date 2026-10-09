@@ -255,6 +255,18 @@ screen2Btn.addEventListener('click', () => {
 // ===== SCREEN 3: FINAL ANIMATION =====
 
 function startScreen3Animation() {
+    // 1. First, ensure screen 3 is actually visible and active
+    const screen1 = document.getElementById('screen1');
+    const screen2 = document.getElementById('screen2');
+    const screen3 = document.getElementById('screen3');
+    
+    // Deactivate previous screens
+    if (screen1) screen1.classList.remove('active');
+    if (screen2) screen2.classList.remove('active');
+    
+    // Activate Screen 3
+    screen3.classList.add('active');
+    
     const glowingContainer = document.getElementById('glowingContainer');
     glowingContainer.innerHTML = '';
     
@@ -266,15 +278,19 @@ function startScreen3Animation() {
             glowText.className = 'glowing-text';
             glowText.textContent = 'I LOVE YOU';
             
-            // Random position across entire screen
-            const x = Math.random() * (window.innerWidth - 200);
-            const y = Math.random() * (window.innerHeight - 100);
+            // Random position across entire screen (keeping away from extreme edges)
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 50);
             
             glowText.style.left = x + 'px';
             glowText.style.top = y + 'px';
-            glowText.style.animationDelay = '0s';
             
+            // The animation delay is handled by the setTimeout, 
+            // but we ensure the CSS animation starts immediately upon append
             glowingContainer.appendChild(glowText);
+            
+            // Optional: Remove element after animation finishes to keep DOM clean
+            setTimeout(() => glowText.remove(), 2000);
         }, i * 50); // Stagger appearance for cinematic effect
     }
 }
@@ -285,23 +301,24 @@ let touchEndX = 0;
 
 const envelopesContainer = document.querySelector('.envelopes-container');
 
-envelopesContainer.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-}, false);
+if (envelopesContainer) {
+    envelopesContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
 
-envelopesContainer.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-}, false);
+    envelopesContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+}
 
 function handleSwipe() {
+    if (!envelopesContainer) return;
     const swipeThreshold = 50;
     if (touchStartX - touchEndX > swipeThreshold) {
-        // Swiped left - scroll right in container
         envelopesContainer.scrollLeft += 200;
     }
     if (touchEndX - touchStartX > swipeThreshold) {
-        // Swiped right - scroll left in container
         envelopesContainer.scrollLeft -= 200;
     }
 }
