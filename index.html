@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thea's Monthsary</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- SCREEN 1: Heart Animation -->
+    <div id="screen1" class="screen active">
+        <canvas id="heartCanvas"></canvas>
+        <div class="content">
+            <h1>WELCOME, THEA</h1>
+            <button class="continue-btn" id="screen1-btn">CONTINUE</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: Envelopes -->
+    <div id="screen2" class="screen">
+        <div class="ash-particles" id="ashParticles"></div>
+        <div class="screen2-content">
+            <h2 class="monthsary-title">HAPPY 2ND MONTHSARY!</h2>
+            
+            <div class="envelopes-container">
+                <div class="envelope" id="envelope1">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body">
+                        <span class="question-mark">?</span>
+                    </div>
+                </div>
+                <div class="envelope" id="envelope2">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body">
+                        <span class="question-mark">?</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="swipe-hint">swipe →</p>
+
+            <!-- Envelope Popup -->
+            <div id="envelopePopup" class="popup hidden">
+                <div class="popup-overlay"></div>
+                <div class="popup-content">
+                    <h3 id="popupTitle"></h3>
+                    <button id="popupBtn" class="popup-button"></button>
+                </div>
+            </div>
+
+            <!-- Letter View -->
+            <div id="letterView" class="content-view hidden">
+                <button class="back-btn">BACK</button>
+                <div class="letter-content">
+                    <p>[Your monthsary letter will appear here. Please provide your personal letter.]</p>
+                </div>
+            </div>
+
+            <!-- 100 Reasons View -->
+            <div id="reasonsView" class="content-view hidden">
+                <button class="back-btn">BACK</button>
+                <div class="reasons-content">
+                    <p>[100 reasons why I love you will appear here. Please provide your 100 reasons.]</p>
+                </div>
+            </div>
+
+            <!-- Final Continue Button (appears after envelopes) -->
+            <button class="final-continue-btn hidden" id="screen2-btn">CONTINUE</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: Final Surprise -->
+    <div id="screen3" class="screen">
+        <div class="glowing-container" id="glowingContainer"></div>
+        <div class="final-message">
+            <h1>HAPPY 2ND MONTHSARY</h1>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
